@@ -1,0 +1,661 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    The Line Magazine
+{% endblock %}
+{% block contents %}
+
+    <style>
+        /* Global fixes to prevent overflow */
+        body {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+
+        /* Fix for oversized images */
+        img {
+            max-width: 100%;
+            height: auto;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+        }
+
+        .card-text {
+            color: #555;
+        }
+
+        .styled-button {
+            background-color: orangered;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            max-width: 100%; /* Prevent button overflow */
+        }
+
+        .styled-button a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .styled-button:hover {
+            background-color: orangered;
+            box-shadow: orangered 2px 2px 2px;
+        }
+
+        .navbar {
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            color: white;
+            width: 100%;
+            padding: 20px 25px; /* Reduced horizontal padding */
+        }
+
+        .navbar-nav {
+            margin: auto;
+        }
+
+        .navbar-nav .nav-link {
+            transition: transform 0.3s ease-in-out;
+            color: white;
+        }
+
+        .navbar-nav .nav-link:hover {
+            transform: scale(1.1);
+        }
+
+        .dark-mode-toggle {
+            position: relative; /* Changed from absolute to relative */
+            margin-left: auto; /* Push to the right */
+        }
+
+        @media (max-width: 991px) {
+            .navbar {
+                padding: 10px;
+            }
+
+            .dark-mode-toggle {
+                margin-top: 10px;
+            }
+
+            .navbar-collapse {
+                text-align: center;
+            }
+
+            .navbar-nav {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Responsive carousel heights with min-height instead of fixed height */
+        .small-carousel {
+            min-height: 150px;
+            max-height: 360px;
+        }
+
+        .large-carousel {
+            min-height: 300px;
+            max-height: 420px;
+        }
+
+        /* Make carousel images cover their container properly */
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Adjust carousel heights on mobile */
+        @media (max-width: 576px) {
+            .small-carousel {
+                min-height: 120px;
+                max-height: 150px;
+            }
+
+            .large-carousel {
+                min-height: 200px;
+                max-height: 250px;
+            }
+        }
+
+        .shadow-glow {
+            box-shadow: 0 0 10px rgba(10, 54, 34, 0.5); /* Soft glow */
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .shadow-glow:hover {
+            box-shadow: 0 0 20px rgba(10, 54, 34, 0.9); /* Stronger glow on hover */
+        }
+
+        /* Fix for featured article overlay */
+        .featured-article {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .featured-article img {
+            width: 100%;
+            height: auto;
+        }
+
+        .featured-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px;
+        }
+
+        /* Fix for swiper slider responsiveness */
+        .swiper-slide {
+            height: auto !important;
+        }
+
+        /* Add container padding */
+        .container {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    </style>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fw-bold">
+        <div class="container-fluid">
+            <!--<a class="navbar-brand" href="#">MAGAZINE</a>-->
+            <img src="{% static 'images/logo.png' %}" alt="logo" style="max-height: 60px;">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            More
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#Article">Article</a></li>
+                            <li><a class="dropdown-item" href="#"></a></li>
+                            <li><a class="dropdown-item" href="#"></a></li>
+                            <li><a class="dropdown-item" href="#"></a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#Editor's Picks">Editor's Picks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                </ul>
+            </div>
+            <button class="btn btn-dark dark-mode-toggle">🌙</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="container my-4" id="Home">
+        <div class="row g-3">
+            <!-- Left side with two smaller carousels -->
+            <div class="col-lg-4 d-flex flex-column gap-3">
+                <!-- First Small Carousel -->
+                <div id="carouselSmall1" class="carousel slide small-carousel" data-bs-ride="carousel">
+                    <div class="carousel-inner h-100">
+                        <div class="carousel-item active h-100">
+                            <img src="{% static 'image/wrokspace2.jpg' %}" class="d-block w-100" alt="Small Slide 1">
+                        </div>
+                        <div class="carousel-item h-100">
+                            <img src="{% static 'image/workspace3.jpeg' %}" class="d-block w-100" alt="Small Slide 2">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselSmall1"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselSmall1"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+                <!-- Second Small Carousel -->
+                <div id="carouselSmall2" class="carousel slide small-carousel" data-bs-ride="carousel">
+                    <div class="carousel-inner h-100">
+                        <div class="carousel-item active h-100">
+                            <img src="{% static 'image/bigwork3.webp' %}" class="d-block w-100" alt="Small Slide 1">
+                        </div>
+                        <div class="carousel-item h-100">
+                            <img src="{% static 'image/wrokspace2.jpg' %}" class="d-block w-100" alt="Small Slide 2">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselSmall2"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselSmall2"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right side with larger carousel -->
+            <div class="col-lg-8">
+                <div id="carouselLarge" class="carousel slide large-carousel" data-bs-ride="carousel">
+                    <div class="carousel-inner h-100">
+                        <div class="carousel-item active h-100">
+                            <img src="{% static 'image/workspace3.jpeg' %}" class="d-block w-100" alt="Large Slide 1">
+                        </div>
+                        <div class="carousel-item h-100">
+                            <img src="{% static 'image/workspace3.jpeg' %}" class="d-block w-100" alt="Large Slide 2">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselLarge"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselLarge"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <br>
+    <br>
+
+    <section>
+        <div class="container mt-5">
+            <!-- Latest Articles Heading -->
+            <div class="text-center mb-4">
+                <h1 class="fw-bold">Latest Articles</h1>
+                <p class="text-muted">"Discover the latest trends and breaking stories!"</p>
+            </div>
+            
+            <br>
+
+            <!-- Featured Article 
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="featured-article">
+                        <div class="featured-overlay">
+                            <h2>Revolutionizing AI: The Future of Technology</h2>
+                            <p>Discover how AI is transforming industries and everyday life.</p>
+                            <a href="#" class="btn btn-light btn-sm">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+
+            <!-- Latest Articles Grid -->
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card article-card h-100">
+                        <img src="{% static 'image/bigwork1.jpg' %}" class="card-img-top"
+                             alt="Article">
+                        <div class="card-body">
+                            <h5 class="card-title">The Future of Health & Wellness</h5>
+                            <p class="card-text text-muted"></p>
+                            <p class="text-muted"><strong>By John Doe</strong> | New York | <small>March 7, 2025 - 10:30
+                                AM</small></p>
+                            <a href="#" class="btn btn-primary btn-sm">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <div class="card article-card h-100">
+                        <img src="{% static 'image/bigwork1.jpg' %}" class="card-img-top"
+                             alt="Article">
+                        <div class="card-body">
+                            <h5 class="card-title">The Future of Health & Wellness</h5>
+                            <p class="card-text text-muted"></p>
+                            <p class="text-muted"><strong>By John Doe</strong> | New York | <small>March 7, 2025 - 10:30
+                                AM</small></p>
+                            <a href="#" class="btn btn-primary btn-sm">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <div class="card article-card h-100">
+                        <img src="{% static 'image/bigwork1.jpg' %}" class="card-img-top"
+                             alt="Article">
+                        <div class="card-body">
+                            <h5 class="card-title">The Future of Health & Wellness</h5>
+                            <p class="card-text text-muted"></p>
+                            <p class="text-muted"><strong>By John Doe</strong> | New York | <small>March 7, 2025 - 10:30
+                                AM</small></p>
+                            <a href="#" class="btn btn-primary btn-sm">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="text-center my-4">
+        <!-- Link to More Content Page -->
+        <button class="styled-button" style="max-width: 85%; width: auto;">
+            <a href="{% url 'contents' %}" class="more-content-link">More Content</a>
+        </button>
+    </div>
+
+    <section class="articles py-5" id="editors-picks">
+        <div class="container">
+            <!-- Title Row -->
+            <div class="row justify-content-between align-items-center mb-4">
+                <!-- Editor's Picks Heading (Left) -->
+                <div class="col-md-8">
+                    <h1 class="fw-bold">Editor's Picks</h1>
+                    <p class="text-muted">"Discover the latest trends and breaking stories!"</p>
+                </div>
+                <!-- Content Heading (Right) -->
+                <div class="col-md-4 text-start">
+                    <h1 class="fw-bold">Connect</h1>
+                    <p class="text-muted">"Explore our curated selections and featured insights!"</p>
+                </div>
+            </div>
+
+            <!-- Main Row: Left (Articles) | Right (Content Cards & Follow Me Section) -->
+            <div class="row">
+                <!-- Left Side: Articles Section -->
+                <div class="col-md-8">
+                    <div class="row g-4">
+                        {% for article in editor_section %}
+                            <div class="col-md-6 mb-4">
+                                <div class="card h-100">
+                                    <img src="{{ article.poster.url }}" class="card-img-top" alt="Article Image">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ article.title | truncatewords:4 }}</h5>
+                                        <a href="{% url 'articles' pk=article.id %}"
+                                           class="btn btn-outline-primary btn-sm">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Right Side: Content Cards Section -->
+                <div class="col-md-4">
+                    <div class="row g-3">
+                        <!-- Content Card 1 -->
+                        <div class="col-12 mb-3">
+                            <div class="card shadow-sm p-3">
+                                <h5 class="fw-bold">Trending Now</h5>
+                                <p class="text-muted">Stay updated with the hottest topics of the day.</p>
+                                <a href="{% url 'trending' %}" class="btn btn-sm btn-primary shadow-glow">Explore</a>
+                            </div>
+                        </div>
+                        <!-- Content Card 2 -->
+                        <div class="col-12 mb-3">
+                            <div class="card shadow-sm p-3">
+                                <h5 class="fw-bold">Watch Now</h5>
+                                <p class="text-muted">Get premium content from industry experts.</p>
+                                <a href="{% url 'exclusive_insight' %}" class="btn btn-sm btn-secondary shadow-glow">Read
+                                    More</a>
+                            </div>
+                        </div>
+                        <!-- Content Card 3 -->
+                        <div class="col-12 mb-3">
+                            <div class="card shadow-sm p-3">
+                                <h5 class="fw-bold">Subscribe & Stay Ahead</h5>
+                                <p class="text-muted">Join our newsletter for the latest updates.</p>
+                                <a href="#" class="btn btn-success shadow-glow">Subscribe</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Follow Me Section -->
+                    <div class="card shadow-sm mt-4 p-3 text-center">
+                        <h5 class="fw-bold">Follow Me</h5>
+                        <p class="text-muted">Stay connected on social media</p>
+                        <div class="d-flex justify-content-center">
+                            <a href="#" class="me-3"><i class="fab fa-facebook fa-2x text-primary"></i></a>
+                            <a href="#" class="me-3"><i class="fab fa-telegram fa-2x text-info"></i></a>
+                            <a href="#" class="me-3"><i class="fab fa-instagram fa-2x text-danger"></i></a>
+                            <a href="#"><i class="fab fa-youtube fa-2x text-danger"></i></a>
+                        </div>
+                    </div>
+                </div> <!-- End Right Side -->
+            </div> <!-- End Main Row -->
+        </div>
+    </section>
+
+    <section>
+        <div class="container mt-5">
+            <style>
+                .slider-container {
+                    width: 100%;
+                    margin: auto;
+                    overflow: hidden;
+                }
+
+                .swiper-slide {
+                    background: #fff;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                    overflow: hidden;
+                }
+
+                .card {
+                    padding: 15px;
+                    text-align: center;
+                }
+
+                .card img {
+                    width: 100%;
+                    height: 150px;
+                    object-fit: cover;
+                    border-radius: 10px;
+                }
+
+                .card h3 {
+                    margin-top: 10px;
+                    font-size: 16px;
+                    color: #333;
+                }
+
+                .card p {
+                    font-size: 14px;
+                    color: gray;
+                }
+
+                .swiper-button-next,
+                .swiper-button-prev {
+                    color: #6b46c1;
+                }
+
+                .see-all {
+                    text-align: right;
+                    margin-right: 20px;
+                    font-size: 14px;
+                }
+
+                .see-all a {
+                    color: #6b46c1;
+                    text-decoration: none;
+                }
+                
+                /* Fix for Swiper container */
+                .swiper {
+                    width: 100%;
+                    height: auto;
+                    overflow: visible;
+                }
+                
+                /* Fix for Swiper slide buttons */
+                .swiper-button-next, .swiper-button-prev {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    z-index: 10;
+                }
+            </style>
+
+            <div class="mb-4">
+                <h1 class="fw-bold text-start">Column</h1>
+                <p class="text-muted text-start">"Discover the latest trends and breaking stories!"</p>
+            </div>
+            
+            <!-- Add Swiper CSS from CDN to ensure it's available -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.css">
+
+            <div class="slider-container">
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="card">
+                                <img src="{% static 'image/img9.jpg' %}" alt="Fiqh">
+                                <h3>Fiqh, Shari'a</h3>
+                                <p>November 7, 2024</p>
+                                <p>വക്ഫ്: അറിയേണ്ടതെല്ലാം</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="card">
+                                <img src="{% static 'image/img8.jpg' %}" alt="Quran">
+                                <h3>Quran, Shari'a</h3>
+                                <p>November 15, 2024</p>
+                                <p>സതാനിന്റെ സമ്പത്തിന്റെ അവസ്ഥ</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="card">
+                                <img src="{% static 'image/img7.jpg' %}" alt="Sunnah">
+                                <h3>Shari'a, Sunnah</h3>
+                                <p>November 14, 2024</p>
+                                <p>താണിമകളെ അനന്തം</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="card">
+                                <img src="{% static 'image/img2.jpg' %}" alt="Faith">
+                                <h3>Articles, Faith</h3>
+                                <p>November 13, 2024</p>
+                                <p>സത്യത്തിൽ മുസ്ലിം </p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="card">
+                                <img src="{% static 'image/img2.jpg' %}" alt="Faith">
+                                <h3>Articles, Faith</h3>
+                                <p>November 13, 2024</p>
+                                <p>സത്യത്തിൽ മുസ്ലിം </p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="card">
+                                <img src="{% static 'image/img7.jpg' %}" alt="Faith">
+                                <h3>Articles, Faith</h3>
+                                <p>November 13, 2024</p>
+                                <p>സത്യത്തിൽ മുസ്ലിം </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-5 mt-5" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <h5>About Us</h5>
+                    <p>The Line Magazine brings you the latest trends and stories from around the world.</p>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li>Address: Mlappuram, Manjeri</li>
+                        <li>Phone: +916238710413</li>
+                        <li>Email: thelinemagazine@yourwebsite.com</li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <h5>Follow Us</h5>
+                    <div class="d-flex justify-content-center">
+                        <a href="#" class="me-3 text-white"><i class="bi bi-facebook"></i> Facebook</a>
+                        <a href="#" class="me-3 text-white"><i class="bi bi-twitter"></i> Twitter</a>
+                        <a href="#" class="me-3 text-white"><i class="bi bi-instagram"></i> Instagram</a>
+                        <a href="#" class="text-white"><i class="bi bi-youtube"></i> YouTube</a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4">
+                <p class="mb-0">&copy; 2024 Magazine Website | Designed by Muhammed Asad N</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- External Libraries -->
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Swiper JS (Make sure it's loaded) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.js"></script>
+    
+    <!-- Initialize Swiper with proper breakpoints -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var swiper = new Swiper(".mySwiper", {
+                slidesPerView: 1,
+                spaceBetween: 20,
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+                breakpoints: {
+                    // When window width is >= 640px
+                    640: {
+                        slidesPerView: 1,
+                        spaceBetween: 20
+                    },
+                    // When window width is >= 768px
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 20
+                    },
+                    // When window width is >= 1024px
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 20
+                    }
+                }
+            });
+        });
+    </script>
+
+    <!-- Dark Mode Toggle Script -->
+    <script>
+        document.querySelector('.dark-mode-toggle').addEventListener('click', function () {
+            document.body.classList.toggle('dark-mode');
+            // Change button icon based on dark mode status
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            this.innerHTML = isDarkMode ? '☀️' : '🌙';
+        });
+    </script>
+{% endblock %}

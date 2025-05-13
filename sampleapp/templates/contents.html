@@ -1,0 +1,246 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    contents
+{% endblock %}
+
+{% block contents %}
+
+    <style>
+        .navbar {
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            color: white;
+            width: 100%;
+            height: 130px;
+            padding: 20px 50px;
+        }
+
+        .navbar-nav {
+            margin: auto;
+        }
+
+        .navbar-nav .nav-link {
+            transition: transform 0.3s ease-in-out;
+            color: white;
+        }
+
+        .navbar-nav .nav-link:hover {
+            transform: scale(1.1);
+
+        }
+
+        .dark-mode-toggle {
+            position: absolute;
+            right: 20px;
+        }
+
+        @media (max-width: 991px) {
+            .navbar {
+                height: auto;
+                padding: 10px 20px;
+            }
+
+            .dark-mode-toggle {
+                position: static;
+                margin-top: 10px;
+            }
+
+            .navbar-collapse {
+                text-align: center;
+
+            }
+
+            .navbar-nav {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fw-bold">
+        <div class="container-fluid">
+            <!--<a class="navbar-brand" href="#">MAGAZINE</a>-->
+            <img src="{% static 'image/logo/THE LINE MAGAZINE print.jpg' %}" alt="logo" width="100" height="100">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            More
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#Article">Article</a></li>
+                            <li><a class="dropdown-item" href="#"></a></li>
+                            <li><a class="dropdown-item" href="#"></a></li>
+                            <li><a class="dropdown-item" href="#"></a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#Editor's Picks">Editor's Picks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                </ul>
+            </div>
+            <button class="btn btn-dark dark-mode-toggle">🌙</button>
+        </div>
+    </nav>
+    <!--navbar end-->
+
+    <style>
+        /* Custom carousel heights */
+        .small-carousel {
+            height: 200px;
+        }
+
+        .large-carousel {
+            height: 420px;
+        }
+
+        /* Adjust carousel heights on mobile */
+        @media (max-width: 576px) {
+            .small-carousel {
+                height: 150px;
+            }
+
+            .large-carousel {
+                height: 250px;
+            }
+        }
+
+        /* Article Body Section */
+        .article_body {
+            padding: 40px 0;
+        }
+
+        .article-heading {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        /* Card Group Styling */
+        .card-group {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            height: 100%; /* Ensure all cards have the same height */
+        }
+
+        .card-group:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Card Styling */
+        .card {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Ensure the card takes full height */
+        }
+
+        .card:hover {
+            border-color: #007bff;
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .card-body {
+            padding: 20px;
+            flex: 1; /* Allow the card body to grow and fill remaining space */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Space out content evenly */
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .card-text {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .small-text {
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        .author-name {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: gray;
+            margin-bottom: 10px;
+            align-self: flex-start; /* Align author name to the start (left) */
+            width: 100%; /* Ensure it takes full width */
+        }
+
+        .text-muted {
+            font-size: 0.8rem;
+            color: #999;
+            align-self: flex-start; /* Align to the start (left) */
+            width: 100%; /* Ensure it takes full width */
+            margin-bottom: 10px; /* Add spacing if needed */
+        }
+
+        .card-link {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease-in-out;
+            align-self: flex-start; /* Align the button to the left */
+        }
+
+        .card-link:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+    <section class="container article_body">
+        <h1 class="article-heading"></h1>
+        <div class="row mt-6">
+            {% for article in articles %}
+                <div class="card-group btn-outline-secondary col-12 col-md-3 mb-4">
+                    <div class="card">
+                        <img class="card-img-top" src="{{ article.poster.url }}" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ article.title | truncatewords:3 }}</h5>
+                            <p class="card-text small-text"></p>
+                            <h6 class="author-name">{{ article.author }}</h6>
+                            <p class="card-text small-text"><small class="text-muted">{{ article.published_at }}</small>
+                            </p>
+                            <a href="{% url 'articles' pk=article.id %}" class="card-link">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+{% endblock %}

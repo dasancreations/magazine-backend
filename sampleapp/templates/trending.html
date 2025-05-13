@@ -1,0 +1,262 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    trending
+{% endblock %}
+{% block contents %}
+    <style>
+        .trending-section {
+            background: #f8f9fa;
+            padding: 50px 0;
+        }
+
+        .trending-card {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .trending-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .trending-img {
+            width: 40%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .trending-content {
+            padding: 20px;
+            width: 60%;
+        }
+
+        .trending-badge {
+            background: red;
+            color: white;
+            padding: 5px 10px;
+            font-size: 12px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            border-radius: 5px;
+        }
+
+        .author {
+            font-size: 14px;
+            color: gray;
+        }
+
+        @media (max-width: 768px) {
+            .trending-card {
+                flex-direction: column;
+            }
+
+            .trending-img {
+                width: 100%;
+                height: 250px;
+            }
+
+            .trending-content {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        .future-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .future-section h2 {
+            font-size: 1.5rem;
+        }
+
+        .carousel-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel-card img {
+            width: 100%;
+            height: 200px; /* Adjust height as needed */
+            object-fit: cover;
+        }
+
+        .carousel-content-section {
+            padding: 20px;
+            text-align: center; /* Adjust alignment as needed */
+        }
+
+        .carousel-content-section h5 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+
+        .carousel-content-section p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            display: none;
+        }
+    </style>
+    
+
+    <section class="trending-section">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Trending Articles (Left Side) -->
+                <div class="col-12 col-md-8">
+                    <div class="text-start mb-4">
+                        <h2 class="fw-bold">Trending Articles</h2>
+                        <p class="text-muted">Check out the most popular stories right now</p>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Trending Article Card -->
+                        <div class="col-12">
+                            <div class="trending-card position-relative">
+                                <span class="trending-badge">Trending</span>
+                                <img src="{% static 'image/img3.jpg' %}" class="trending-img" alt="Trending">
+                                <div class="trending-content">
+                                    <h5 class="fw-bold">How AI is Revolutionizing the World</h5>
+                                    <p class="text-muted">Artificial intelligence is shaping the future in incredible
+                                        ways.</p>
+                                    <p class="author">By John Doe · 3 hours ago</p>
+                                    <a href="#" class="btn btn-primary btn-sm">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="trending-card position-relative">
+                                <span class="trending-badge">Trending</span>
+                                <img src="{% static 'image/img3.jpg' %}" class="trending-img" alt="Trending">
+                                <div class="trending-content">
+                                    <h5 class="fw-bold">The Rise of Startups in 2025</h5>
+                                    <p class="text-muted">New businesses are reshaping industries worldwide.</p>
+                                    <p class="author">By Sarah Smith · 5 hours ago</p>
+                                    <a href="#" class="btn btn-primary btn-sm">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="trending-card position-relative">
+                                <span class="trending-badge">Trending</span>
+                                <img src="{% static 'image/img9.jpg' %}" class="trending-img" alt="Trending">
+                                <div class="trending-content">
+                                    <h5 class="fw-bold">The Best Health & Wellness Tips</h5>
+                                    <p class="text-muted">Improve your lifestyle with these expert-backed tips.</p>
+                                    <p class="author">By Alex Brown · 1 day ago</p>
+                                    <a href="#" class="btn btn-primary btn-sm">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- End Left Side -->
+
+                <!-- Right Side (Future Articles & Poster Carousel) -->
+                <div class="col-12 col-md-4">
+                    <!-- Future Articles Section -->
+                    <div class="future-section mb-4">
+                        <div class="text-start">
+                            <h2 class="fw-bold">🚀 Future Articles</h2>
+                            <p class="text-muted">Explore what's coming next in the industry.</p>
+                        </div>
+
+                        <ul class="list-group">
+                            <li class="list-group-item">🔮 The Future of Web Development</li>
+                            <li class="list-group-item">📱 Mobile Tech Trends in 2025</li>
+                            <li class="list-group-item">🌍 AI’s Impact on Sustainability</li>
+                            <li class="list-group-item">🚗 The Rise of Autonomous Vehicles</li>
+                        </ul>
+                    </div>
+
+                    <br>
+
+                    <div class="text-start mb-4">
+                        <h2 class="fw-bold">Trending Articles</h2>
+                        <p class="text-muted">Check out the most popular stories right now</p>
+                    </div>
+                    <br>
+
+                    <!-- Carousel Section -->
+                    <div class="carousel-card">
+                        <!-- Carousel -->
+                        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                                        class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                                        aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                                        aria-label="Slide 3"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="{% static 'image/img11.jpg' %}" class="d-block w-100" alt="Slide 1">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="{% static 'image/img2.jpg' %}" class="d-block w-100" alt="Slide 2">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="{%  static 'image/img3.jpg' %}" class="d-block w-100" alt="Slide 3">
+                                </div>
+                            </div>
+                            <!-- Remove arrows if not needed -->
+                            <button class="carousel-control-prev" type="button"
+                                    data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                    data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+
+                        <!-- Content Section Outside Carousel -->
+                        <div class="carousel-content-section">
+                            <h5>Slide Title</h5>
+                            <p><a href="">Slide description goes here. This content is outside the carousel but inside the
+                                card.<a></a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

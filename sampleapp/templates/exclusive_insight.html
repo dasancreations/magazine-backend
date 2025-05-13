@@ -1,0 +1,223 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Exclusive Insight
+{% endblock %}
+
+{% block contents %}
+
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 10px;
+            margin-top: 20px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        /* Insights Grid */
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .insight-card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .insight-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .insight-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .category {
+            display: inline-block;
+            font-size: 0.9rem;
+            color: #fff;
+            background: #ff6f61;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .read-more {
+            text-decoration: none;
+            color: #ff6f61;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: #333;
+        }
+
+        .secondary-section {
+            background: cornflowerblue;
+            width: 100%;
+            height: 300px;
+            margin-top: 40px;
+        }
+
+        .third-section {
+
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 2rem;
+            }
+
+            .insights-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <section class="exclusive-insights">
+        <div class="container">
+            <div class="text-start mb-4">
+                <h2 class="fw-bold">Exclusive Insights</h2>
+                <p class="subtitle text-muted">Discover behind-the-scenes stories, expert interviews, and in-depth
+                    analysis you won't
+                    find anywhere else.</p>
+            </div>
+
+            <div class="insights-grid">
+                <!-- Insight 1 -->
+                <div class="insight-card">
+                    <img src="{% static 'image/img7.jpg' %}" alt="Expert Interview">
+                    <div class="card-content">
+                        <span class="category">Expert Interview</span>
+                        <h3>The Future of AI: Exclusive Interview with Dr. Jane Doe</h3>
+                        <p>Dr. Jane Doe shares her thoughts on the future of artificial intelligence and its impact on
+                            society.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </div>
+
+                <!-- Insight 2 -->
+                <div class="insight-card">
+                    <img src="{% static 'image/img8.jpg' %}" alt="Behind the Scenes">
+                    <div class="card-content">
+                        <span class="category">Behind the Scenes</span>
+                        <h3>How We Shot Our Latest Cover Story</h3>
+                        <p>Go behind the scenes of our most ambitious photo shoot yet.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </div>
+
+                <!-- Insight 3 -->
+                <div class="insight-card">
+                    <img src="{% static 'image/img9.jpg' %}" alt="Trend Report">
+                    <div class="card-content">
+                        <span class="category">Trend Report</span>
+                        <h3>Top 5 Trends Shaping Fashion in 2024</h3>
+                        <p>Our exclusive report on the trends you need to know about.</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="secondary-section">
+
+
+        </div>
+
+        <br>
+
+        <div class="third-section">
+
+
+        </div>
+    </section>
+    <footer class="bg-dark text-white text-center py-5" id="about">
+        <div class="row">
+            <div class="col-md-4">
+                <h5>About Us</h5>
+                <p></p>
+            </div>
+            <div class="col-md-4">
+                <h5>Contact Us</h5>
+                <ul class="list-unstyled">
+                    <li>Address: Mlappuram, Manjeri</li>
+                    <li>Phone: +916238710413</li>
+                    <li>Email: thelinemagazine@yourwebsite.com</li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h5>Follow Us</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#"><i class="bi bi-facebook"></i>Facebook</a></li>
+                    <li><a href="#"><i class="bi bi-twitter"></i> Twitter</a></li>
+                    <li><a href="#"><i class="bi bi-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="bi bi-github"></i> youtube</a></li>
+                </ul>
+            </div>
+
+            <p>&copy; 2024 Magazine Website | Designed by Muhammed Asad N</p>
+    </footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}]

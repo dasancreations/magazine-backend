@@ -1,0 +1,85 @@
+/* Custom Styles for container Section */
+.hero {
+    background-position: center;
+    height: 80vh;
+    background-size: cover;
+    background-color: #e4e3e3;
+    margin: 0;
+}
+
+.card {
+    width: 100%;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.btn, .editorial-link {
+    border: 0 solid;
+    background-color: white;
+    padding: 5px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/*editorial section css*/
+.editorial-picks {
+    background-color: #f9f9f9;
+}
+
+.styled-button {
+    background-color: purple; /* Green background */
+    border: none; /* Remove default border */
+    padding: 12px 24px; /* Spacing inside button */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition */
+    cursor: pointer; /* Pointer on hover */
+}
+
+footer {
+    margin-top: 2rem;
+}
+
+.heading-1 {
+    font-size: 48px;
+    font-weight: bold;
+    position: relative;
+    color: #333;
+    text-align: center;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+
+
+
+/* exclusive section */
+
